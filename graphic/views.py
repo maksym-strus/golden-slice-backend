@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 from .models import Graphic
 from .serializers import GraphicSerializer
 
-
 #
 # @api_view(['GET', 'POST'])
 # def graphic_list(request):
@@ -108,11 +107,13 @@ from .serializers import GraphicSerializer
 from .models import Graphic
 from .serializers import GraphicSerializer
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 
 class GraphicList(generics.ListCreateAPIView):
     queryset = Graphic.objects.all()
     serializer_class = GraphicSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class GraphicDetail(generics.RetrieveUpdateDestroyAPIView):
