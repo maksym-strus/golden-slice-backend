@@ -1,2 +1,1 @@
-worker: python manage.py migrate
-worker: python manage.py runserver 8080
+web: python manage.py runserver 8080
