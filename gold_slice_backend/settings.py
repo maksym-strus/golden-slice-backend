@@ -1,6 +1,8 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
@@ -159,3 +161,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:9000"
 ]
+
+DATABASES['default'] = dj_database_url.config(default='postgres://postgres:231234@127.0.0.1:5432/goldenslicedb',conn_max_age=600)
