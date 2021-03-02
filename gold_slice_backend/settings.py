@@ -18,7 +18,9 @@ SECRET_KEY = 'z*+rze&+4a78(!hclll$_3abw_4j357rz04kcpudjqvk8vsx8('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'golden-slice-app.herokuapp.com'
+]
 
 
 # Application definition
