@@ -1,1 +1,1 @@
-web: gunicorn backend.wsgi --log-file -
+web: gunicorn gold_slice_backend.wsgi --log-file -
