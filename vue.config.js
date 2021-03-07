@@ -5,4 +5,5 @@ module.exports = {
     'vuetify'
   ],
   outputDir: path.resolve(__dirname, 'build'),
+  assetsDir: path.resolve(__dirname, 'build', 'static')
 }
