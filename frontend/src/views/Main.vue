@@ -7,8 +7,10 @@
 
     <v-main class="grey lighten-5" app>
 
-      <v-container fluid>
-        <router-view/>
+      <v-container class="pa-3">
+        <v-card class="pa-6">
+          <router-view/>
+        </v-card>
       </v-container>
 
     </v-main>

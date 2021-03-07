@@ -21,7 +21,9 @@ const routes = [
     component: Main,
     children: [
       { path: 'about', name: 'About', component: () => import( '../views/About') },
-      { path: 'home', name: 'Home', component: () => import('../views/Home') }
+      { path: 'home', name: 'Home', component: () => import('../views/Home') },
+      { path: 'result/:id', name: 'Result', component: () => import('../views/Result') },
+      { path: 'result', name: 'ResultList', component: () => import('../views/ResultList')}
     ]
   }
 ]
