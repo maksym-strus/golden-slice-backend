@@ -10,6 +10,7 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: Auth,
+    redirect: '/auth/login',
     children: [
       { path: 'login', name: 'Login', component: () => import('../views/Login') },
       { path: 'register', name: 'Register', component: () => import('../views/Register') }
@@ -19,6 +20,7 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main,
+    redirect: '/home',
     children: [
       { path: 'about', name: 'About', component: () => import( '../views/About') },
       { path: 'home', name: 'Home', component: () => import('../views/Home') },

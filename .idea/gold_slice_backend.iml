@@ -14,9 +14,9 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/venv/include" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Include" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (gold_slice_backend)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (golden_slice_backend)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
