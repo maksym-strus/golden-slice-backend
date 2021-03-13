@@ -1,1 +1,1 @@
-web: gunicorn --bind=localhost:$PORT gold_slice_backend.wsgi --log-file -
+web: gunicorn --bind=0.0.0.0:$PORT gold_slice_backend.wsgi --log-file -
