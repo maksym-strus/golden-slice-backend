@@ -1,1 +1,1 @@
-web: gunicorn gold_slice_backend.wsgi --log-file -
+web:  --bind=localhost:8000 gold_slice_backend.wsgi --log-file -
