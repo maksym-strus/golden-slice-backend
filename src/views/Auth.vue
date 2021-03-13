@@ -1,22 +1,20 @@
 <template>
   <v-app>
     <v-main>
-      <v-parallax
-          height="900"
-          src="../assets/img/auth-background.jpg"
-      >
-        <v-row
-            align="center"
-            justify="center"
-        >
-          <v-col
-              cols="4"
+      <div class="container">
+          <v-row
+              align="center"
+              justify="center"
+              class="mt-6 mb-4"
           >
-            <router-view/>
-          </v-col>
-        </v-row>
-        <div class="background-overlay"></div>
-      </v-parallax>
+            <v-col
+                cols="6"
+            >
+              <router-view/>
+            </v-col>
+          </v-row>
+      </div>
+          <div class="background-overlay"></div>
     </v-main>
   </v-app>
 </template>
@@ -29,11 +27,16 @@
 
 <style scoped>
   .background-overlay {
-    background-color: #fafafa;
+    background-image: url("../assets/img/auth-background.jpg");
     position: absolute;
-    width: 60%;
+    width: 45%;
     height: 100%;
     right: 0;
-    z-index: -1;
+    top: 0;
+    z-index: 1;
+  }
+  .container {
+    z-index: 2;
+    position: relative;
   }
 </style>

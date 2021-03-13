@@ -19,7 +19,9 @@ SECRET_KEY = 'z*+rze&+4a78(!hclll$_3abw_4j357rz04kcpudjqvk8vsx8('
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'golden-slice-app.herokuapp.com'
+    'golden-slice-app.herokuapp.com',
+    '127.0.0.1',
+    'localhost'
 ]
 
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'gold_slice_backend.urls'
@@ -170,5 +172,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:9000"
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 DATABASES['default'] = dj_database_url.config(default='postgres://postgres:231234@127.0.0.1:5432/goldenslicedb',conn_max_age=600)

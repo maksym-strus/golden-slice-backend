@@ -5,6 +5,11 @@ from .serializers import MyTokenObtainPairSerializer, RegisterSerializer, Change
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
+from rest_framework import status
+
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
@@ -27,11 +32,6 @@ class UpdateProfileView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
-
-from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.response import Response
-from rest_framework import status
 
 
 class LogoutView(APIView):

@@ -1,8 +1,8 @@
 <template>
   <v-card
       elevation="2"
-      height="500"
-      outlined>
+      outlined
+      :height="height">
     <v-container
         class="pa-10">
       <v-row
@@ -26,6 +26,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    height: {
+      type: Number,
+      default: 500
     }
   }
 }
