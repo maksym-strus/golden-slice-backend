@@ -2,7 +2,8 @@
   <v-card
       elevation="2"
       outlined
-      :height="height">
+      :height="height"
+      :loading="loading">
     <v-container
         class="pa-10">
       <v-row
@@ -30,6 +31,10 @@ export default {
     height: {
       type: Number,
       default: 500
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 }

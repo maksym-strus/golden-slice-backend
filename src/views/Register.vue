@@ -70,9 +70,9 @@
           ></v-text-field>
 
           <div v-if="errors">
-            <ul v-for="error in errors" :key="error.join('')">
+            <ul v-for="(error,errorName) in errors" :key="error.join('')">
               <li class="red--text" v-for="errorText of error" :key="errorText">
-                {{errorText}}
+                {{errorName.toUpperCase()}}: {{errorText}}
               </li>
             </ul>
           </div>
@@ -120,7 +120,8 @@ export default {
     email: '',
     firstname: '',
     lastname: '',
-    errors: null
+    errors: null,
+    loading: false
   }),
 
   validations: {
@@ -179,6 +180,8 @@ export default {
       this.$v.$touch()
 
       if (!this.$v.$invalid) {
+        this.loading = true
+
         server.post('/auth/register', {
           username: this.username,
           password: this.password,
@@ -187,11 +190,14 @@ export default {
           first_name: this.firstname,
           last_name: this.lastname
         })
-        .then((data) => {
-          console.log(data.data)
+        .then(() => {
+          this.$router.push('login')
         })
         .catch((err) => {
           this.errors = err.response.data
+        })
+        .finally(() => {
+          this.loading = false
         })
       }
     }

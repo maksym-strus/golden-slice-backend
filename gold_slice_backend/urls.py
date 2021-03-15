@@ -18,9 +18,9 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
 basicpatterns = [
-    path('graphic/', include('graphic.urls')),
-    path('auth/', include('auth.urls')),
-    path('admin/', admin.site.urls),
+    path('graphic', include('graphic.urls')),
+    path('auth', include('auth.urls')),
+    path('admin', admin.site.urls),
 ]
 
 urlpatterns = [

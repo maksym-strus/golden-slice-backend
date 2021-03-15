@@ -1,5 +1,5 @@
 <template>
-  <auth-card title="Login" :height="500">
+  <auth-card title="Login" :height="550" :loading="loading">
     <v-row
         justify="start"
         align="start">
@@ -28,12 +28,8 @@
               :error="!!passwordErrors.length"
           ></v-text-field>
 
-          <div v-if="errors">
-            <ul v-for="error in errors" :key="error.join('')">
-              <li class="red--text" v-for="errorText of error" :key="errorText">
-                {{errorText}}
-              </li>
-            </ul>
+          <div v-if="error">
+            <span class="red--text">{{error.detail}}</span>
           </div>
 
           <v-btn
@@ -74,7 +70,8 @@ export default {
   data: () => ({
     username: '',
     password: '',
-    errors: null
+    error: null,
+    loading: false
   }),
   validations: {
     username: { required, maxLength: maxLength(10) },
@@ -101,20 +98,28 @@ export default {
       this.$v.$touch()
 
       if (!this.$v.$invalid) {
+        this.loading = true
+
         server.post('/auth/login', {
           username: this.username,
           password: this.password,
-          password2: this.password2,
-          email: this.email,
-          first_name: this.firstname,
-          last_name: this.lastname
         })
-            .then((data) => {
-              console.log(data.data)
-            })
-            .catch((err) => {
-              this.errors = err.response.data
-            })
+          .then((res) => {
+            const { access, refresh } = res.data
+
+            localStorage.setItem('accessToken', access)
+            localStorage.setItem('refreshToken', refresh)
+
+            this.$store.dispatch('setAuth', true)
+
+            this.$router.push({name: 'Main'})
+          })
+          .catch((err) => {
+            this.error = err.response.data
+          })
+        .finally(() => {
+            this.loading = false
+        })
       }
     }
   }

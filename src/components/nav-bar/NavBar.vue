@@ -18,7 +18,9 @@
                  <v-icon v-text="item.icon"></v-icon>
                </v-list-item-icon>
                <v-list-item-content>
-                 <v-list-item-title v-text="item.text"></v-list-item-title>
+                 <v-list-item-title>
+                   <router-link :to="item.link">{{item.text}}</router-link>
+                 </v-list-item-title>
                </v-list-item-content>
              </v-list-item>
            </v-list-item-group>
@@ -34,9 +36,9 @@ export default {
   data: () => ({
     selectedItem: 1,
     items: [
-      { text: 'Home', icon: 'mdi-clock' },
-      { text: 'My calculations', icon: 'mdi-account' },
-      { text: 'About', icon: 'mdi-flag' },
+      { text: 'Home', icon: 'mdi-clock', link: '/home' },
+      { text: 'My calculations', icon: 'mdi-account', link: '/result' },
+      { text: 'About', icon: 'mdi-flag', link: '/about' },
     ],
   })
 }

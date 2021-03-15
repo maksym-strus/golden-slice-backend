@@ -26,7 +26,9 @@ export default {
 name: "Result",
   components: {
   Chart
-  }
+  },
+  props: ['id'],
+
 }
 </script>
 

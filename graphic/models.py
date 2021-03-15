@@ -7,4 +7,3 @@ class Graphic(models.Model):
     start_point = models.FloatField()
     end_point = models.FloatField()
     accuracy = models.FloatField()
-    number_of_points = models.IntegerField()

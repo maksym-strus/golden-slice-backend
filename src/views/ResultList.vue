@@ -24,8 +24,20 @@
 </template>
 
 <script>
+import server from "@/utils/server-api";
+
 export default {
-name: "ResultList"
+  name: "ResultList",
+  data: () => ({
+    graphics: []
+  }),
+  mounted() {
+    server.get('/graphic/')
+    .then((res) => {
+      console.log(res.data)
+      this.graphics = res.data
+    })
+  }
 }
 </script>
 

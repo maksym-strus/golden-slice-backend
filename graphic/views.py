@@ -124,6 +124,13 @@ class GraphicList(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+    def list(self, request, *args, **kwargs):
+        user = request.user
+        user_graphics = Graphic.objects.all().filter(user_id=user.pk)
+        serializer = self.get_serializer(user_graphics, many=True)
+
+        return Response(serializer.data)
+
 
 class GraphicDetail(generics.RetrieveAPIView):
     queryset = Graphic.objects.all()
