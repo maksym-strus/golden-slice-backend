@@ -18,20 +18,14 @@
      Loading
    },
    data: () => ({
-     isLoading: false
+     isLoading: true
    }),
-   mounted() {
-     this.isLoading = true
-
+   created() {
      server.post('/auth/check', {
        token: localStorage.getItem('accessToken')
      })
-      .then(() => {
-        this.$store.dispatch('setAuth', true)
-
-        this.$router.push({ name: 'Main'})
-      })
      .catch(() => {
+       this.$store.dispatch('setAuth', false)
        this.$router.push({name: 'Login'})
      })
      .finally(() => {

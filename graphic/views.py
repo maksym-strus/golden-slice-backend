@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 from .models import Graphic
 from .serializers import GraphicSerializer
 
+from .golden_ratio import calculate_function_local_min
+
 #
 # @api_view(['GET', 'POST'])
 # def graphic_list(request):
@@ -136,3 +138,22 @@ class GraphicDetail(generics.RetrieveAPIView):
     queryset = Graphic.objects.all()
     serializer_class = GraphicSerializer
     permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk, **kwargs):
+        graphics = Graphic.objects.filter(pk = pk)
+
+        if len(graphics) == 0:
+            return Response("No graphic exists with that id",status = status.HTTP_404_NOT_FOUND)
+
+        graphic = graphics[0]
+
+        if graphic.user_id.pk != request.user.pk:
+            return Response("You have no access to that graphic",status = status.HTTP_403_FORBIDDEN)
+
+        try:
+            obj = calculate_function_local_min(graphic.formula)
+
+            return Response(obj)
+
+        except:
+            return Response(status = status.HTTP_500_INTERNAL_SERVER_ERROR)

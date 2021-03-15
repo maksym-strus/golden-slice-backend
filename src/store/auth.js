@@ -1,6 +1,6 @@
 const auth = {
     state: {
-        isAuth: false
+        isAuth: !!localStorage.getItem('accessToken')
     },
     getters: {
         isAuth: (state) => state.isAuth
