@@ -12,11 +12,22 @@
         <h3>Point b: {{ resultData.end_point }}</h3>
         <h3>Eps: {{ resultData.acc}}</h3>
         <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
+        <h3>Current iteration: {{ currentIteration }}</h3>
       </v-col>
 
-      <v-col cols="6" v-for="(chart,key) in resultData.iterations" :key="key">
-        <apex-chart type="line" :series="series" :options="prepareData(chart)"/>
-      </v-col>
+      <v-carousel
+          hide-delimiters
+          :cycle="false"
+          height="800"
+      >
+        <v-carousel-item
+            v-for="(chart,key) in resultData.iterations"
+            :key="key"
+        >
+          <apex-chart type="line" :series="series" :options="prepareData(chart)"/>
+        </v-carousel-item>
+      </v-carousel>
+
     </v-row>
   </v-container>
 </template>
@@ -36,7 +47,8 @@ name: "Result",
   },
   data: () => ({
     resultData: null,
-    loading: true
+    loading: true,
+    currentIteration: 0,
   }),
   props: ['id'],
   mounted() {
@@ -69,17 +81,22 @@ name: "Result",
     prepareData(points) {
       return {
         xaxis: {
+          decimalsInFloat: 2,
+          tickAmount: 5,
           labels: {
-            show: false
+
           }
         },
         yaxis: {
+          decimalsInFloat: 2,
           labels: {
-            show: false
+
           }
         },
         chart: {
           id: 'vuechart-example',
+          height: '100%',
+          width: '90%'
         },
         annotations: {
           xaxis: [
