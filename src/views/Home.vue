@@ -24,26 +24,35 @@
 
          <v-col cols="3">
            <v-text-field
-               v-model="pointA"
-               placeholder="Point A:"
+               v-model="pointX0"
+               placeholder="Point x0:"
                type="number"
                :rules="[v => !!v || 'It\'s not can be empty']">
            </v-text-field>
          </v-col>
 
-         <v-col cols="3">
-           <v-text-field
-               v-model="pointB"
-               placeholder="Point B:"
-               type="number"
-               :rules="[v => !!v || 'It\'s not can be empty', v => v > pointA || 'Point B must be bigger than A']">
-           </v-text-field>
-         </v-col>
+       <v-col cols="3">
+         <v-text-field
+             v-model="step"
+             placeholder="Step:"
+             type="number"
+             :rules="[v => !!v || 'It\'s not can be empty']">
+         </v-text-field>
+       </v-col>
+
+       <v-col cols="3">
+         <v-text-field
+             v-model="numberOfPoints"
+             placeholder="Number of points:"
+             type="number"
+             :rules="[v => !!v || 'It\'s not can be empty']">
+         </v-text-field>
+       </v-col>
 
          <v-col cols="3">
            <v-text-field
                v-model="accuracy"
-               placeholder="Accuracy"
+               placeholder="Accuracy:"
                type="number"
                :rules="[v => !!v || 'It\'s not can be empty', v => 0 < v && v < 1 || 'Accuracy must be in range from 0 to 1']">
            </v-text-field>
@@ -54,7 +63,7 @@
                type="submit"
                height="50"
                width="100%"
-               color="secondary">
+               color="#ebd534">
              Calculate
            </v-btn>
          </v-col>
@@ -73,8 +82,9 @@ export default {
   name: 'Home',
   data: () => ({
     formula: null,
-    pointA: null,
-    pointB: null,
+    pointX0: null,
+    step: null,
+    numberOfPoints: null,
     accuracy: null
   }),
   methods: {
@@ -82,8 +92,9 @@ export default {
       if (this.$refs.form.validate()) {
         server.post('/graphic', {
           formula: this.formula,
-          start_point: this.pointA,
-          end_point: this.pointB,
+          start_point: this.pointX0,
+          step: this.step,
+          number_of_points: this.numberOfPoints,
           accuracy: this.accuracy
         })
         .then((res) => {

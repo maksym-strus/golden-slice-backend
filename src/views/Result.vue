@@ -1,32 +1,37 @@
 <template>
   <v-container>
-    <Loading v-if="loading" />
+    <loading v-if="loading" />
     <v-row v-else>
       <v-col cols="12">
         <h1>Result</h1>
       </v-col>
-
       <v-col cols="12">
-        <h3>Result is: {{ resultData.result }}</h3>
+        <h3 class="d-inline-block">Formula:
+          <vue-mathjax :formula="resultData.formula" :safe="false"></vue-mathjax>
+        </h3>
+        <h3>Result: {{ resultData.result }}</h3>
         <h3>Point a: {{ resultData.start_point }}</h3>
         <h3>Point b: {{ resultData.end_point }}</h3>
         <h3>Eps: {{ resultData.acc}}</h3>
         <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
-        <h3>Current iteration: {{ currentIteration }}</h3>
+        <h3>Current iteration: {{ currentIteration + 1 }}</h3>
       </v-col>
 
-      <v-carousel
-          hide-delimiters
-          :cycle="false"
-          height="800"
-      >
-        <v-carousel-item
-            v-for="(chart,key) in resultData.iterations"
-            :key="key"
+      <v-col cols="12" v-if="resultData">
+        <v-carousel
+            v-model="currentIteration"
+            hide-delimiters
+            :cycle="false"
+            height="500"
         >
-          <apex-chart type="line" :series="series" :options="prepareData(chart)"/>
-        </v-carousel-item>
-      </v-carousel>
+          <v-carousel-item
+              v-for="(chart,key) in resultData.iterations"
+              :key="key"
+          >
+            <line-chart :styles="myStyles" :options="prepareLabel(chart)" :chartdata="chartdata"/>
+          </v-carousel-item>
+        </v-carousel>
+      </v-col>
 
     </v-row>
   </v-container>
@@ -34,16 +39,18 @@
 
 <script>
 import server from "@/utils/server-api";
-import ApexChart from 'vue-apexcharts'
 
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import LineChart from "@/views/LineChart";
+import {VueMathjax} from 'vue-mathjax'
 
 export default {
 name: "Result",
   components: {
+    LineChart,
     Loading,
-    ApexChart
+    'vue-mathjax': VueMathjax
   },
   data: () => ({
     resultData: null,
@@ -66,56 +73,61 @@ name: "Result",
       })
   },
   computed: {
-    points() {
-      return this.resultData && this.resultData.x_values.map((x, idx) => ({x, y: this.resultData.y_values[idx]}))
+    chartdata() {
+      return {
+        labels: this.resultData ? this.resultData.x_values : [],
+        datasets: [{
+          label: 'f(x)',
+          data: this.resultData ? this.resultData.y_values : [],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
     },
-    series() {
-      return [{
-        name: 'f(x)',
-        data: this.points,
-
-      }]
+    myStyles () {
+      return {
+        height: '500px',
+        position: 'relative'
+      }
     }
   },
   methods: {
-    prepareData(points) {
+    prepareLabel(points) {
       return {
-        xaxis: {
-          decimalsInFloat: 2,
-          tickAmount: 5,
-          labels: {
-
-          }
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
+            ticks: {
+              maxTicksLimit: 9,
+            }
+          }]
         },
-        yaxis: {
-          decimalsInFloat: 2,
-          labels: {
-
-          }
-        },
-        chart: {
-          id: 'vuechart-example',
-          height: '100%',
-          width: '90%'
-        },
-        annotations: {
-          xaxis: [
+        annotation: {
+          annotations: [
             {
-              x: points.start_point,
+              id: 'vline-1',
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: points.start_point,
               borderColor: 'red',
+              borderWidth: 2,
             },
             {
-              x: points.end_point,
+              id: 'vline-2',
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x-axis-0',
+              value: points.end_point,
               borderColor: 'red',
-            },
+              borderWidth: 2,
+            }
           ]
-        }
+        },
       }
-    }
+    },
   }
 }
 </script>
-
-<style scoped>
-
-</style>

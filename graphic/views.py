@@ -151,7 +151,13 @@ class GraphicDetail(generics.RetrieveAPIView):
             return Response("You have no access to that graphic",status = status.HTTP_403_FORBIDDEN)
 
         try:
-            obj = calculate_function_local_min(graphic.formula)
+            obj = calculate_function_local_min(
+                graphic.formula,
+                graphic.start_point,
+                graphic.step,
+                graphic.number_of_points,
+                graphic.accuracy
+            )
 
             return Response(obj)
 

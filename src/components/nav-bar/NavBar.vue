@@ -13,13 +13,14 @@
              <v-list-item
                  v-for="(item, i) in items"
                  :key="i"
+                 :to="item.link"
              >
                <v-list-item-icon>
                  <v-icon v-text="item.icon"></v-icon>
                </v-list-item-icon>
                <v-list-item-content>
                  <v-list-item-title>
-                   <router-link :to="item.link">{{item.text}}</router-link>
+                   {{item.text}}
                  </v-list-item-title>
                </v-list-item-content>
              </v-list-item>
