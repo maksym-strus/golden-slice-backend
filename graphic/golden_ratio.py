@@ -63,8 +63,8 @@ def golden_ratio(func, point_a, point_b, number_of_points, acc):
     f2 = func(x2)
 
     config = {
-        'start_point': a,
-        'end_point': b
+        'start_point': round(a,2),
+        'end_point': round(b,2)
     }
 
     iterations = []
