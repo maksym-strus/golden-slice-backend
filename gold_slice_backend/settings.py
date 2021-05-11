@@ -2,6 +2,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 import dj_database_url
+from pymongo.mongo_client import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -78,14 +79,13 @@ WSGI_APPLICATION = 'gold_slice_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'goldenslicedb',
-        'USER': 'postgres',
-        'PASSWORD': '231234',
-        'HOST': '127.0.0.1'
+        'ENGINE': 'djongo',
+        'NAME': 'goldenSlice',
+        'ENFORCE_SCHEMA': False
     }
 }
 
+MongoClient.HOST = 'mongodb+srv://bob:ba231234@cluster0.tmn5r.mongodb.net/goldenSlice?retryWrites=true&w=majority'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -177,5 +177,3 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-DATABASES['default'] = dj_database_url.config(default='postgres://postgres:231234@127.0.0.1:5432/goldenslicedb',conn_max_age=600)

@@ -1,11 +1,8 @@
-from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
 from sympy.parsing.mathematica import mathematica
 from sympy.printing.latex import latex
 from math import sqrt
 
 import numpy as np
-
-import json
 
 
 class Formula:
@@ -20,8 +17,6 @@ class Formula:
 
 
 def dsk(func, start_point, step):
-    a, b = [0, 1]
-
     h = step
 
     f0 = func(start_point)
@@ -32,6 +27,8 @@ def dsk(func, start_point, step):
 
         f0 = func(start_point)
         f1 = func(start_point + h)
+
+    a, b = [start_point, start_point + h]
 
     x = start_point
     x_values = []
