@@ -16,7 +16,24 @@
         <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
         <h3>Current iteration: {{ currentIteration + 1 }}</h3>
       </v-col>
-
+      <v-col cols="12">
+        <p>
+          <span v-if="currentIteration !== 0">
+            Since
+            <vue-mathjax :formula="`$y_{${ currentIteration - 1 }} = ${ currentIterationData.y_value }$`" />,
+            <vue-mathjax :formula="`$z_{${ currentIteration - 1 }} = ${ currentIterationData.z_value }$`" />
+             and
+            <vue-mathjax :formula="`$f(y_{${ currentIteration - 1 }}) = ${ currentIterationData.f_y_value }$`" />,
+            <vue-mathjax :formula="`$f(z_{${ currentIteration - 1 }}) = ${ currentIterationData.f_z_value }$`" />
+             so
+          <vue-mathjax v-if="currentIterationData.is_left_slice" :formula="`$f(y_{${currentIteration - 1}}) < f(z_{${currentIteration - 1}})$`"/>
+          <vue-mathjax v-if="currentIterationData.is_right_slice" :formula="`$f(y_{${currentIteration - 1}}) > f(z_{${currentIteration - 1}})$`"/><br>
+            then
+          </span>
+          <vue-mathjax :formula="`$a_{${ currentIteration }} = ${ currentIterationData.start_point_value }$`" />,
+          <vue-mathjax :formula="`$b_{${ currentIteration }} = ${ currentIterationData.end_point_value }$`" />
+        </p>
+      </v-col>
       <v-col cols="12" v-if="resultData">
         <v-carousel
             v-model="currentIteration"
@@ -32,7 +49,6 @@
           </v-carousel-item>
         </v-carousel>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -43,7 +59,7 @@ import server from "@/utils/server-api";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import LineChart from "@/views/LineChart";
-import {VueMathjax} from 'vue-mathjax'
+import { VueMathjax } from 'vue-mathjax'
 
 export default {
 name: "Result",
@@ -65,8 +81,9 @@ name: "Result",
           this.resultData = res.data
         })
         .catch((err) => {
+          console.log(err.response.data);
+          console.log(err.response);
           this.$router.push({name: 'Home'})
-          console.log(err.response.data)
         })
       .finally(() => {
         this.loading = false
@@ -90,6 +107,9 @@ name: "Result",
         height: '500px',
         position: 'relative'
       }
+    },
+    currentIterationData () {
+      return this.resultData.iterations[this.currentIteration];
     }
   },
   methods: {

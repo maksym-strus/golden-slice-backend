@@ -1,3 +1,5 @@
+import sys
+
 from django.http import HttpResponse, JsonResponse, Http404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -123,6 +125,18 @@ class GraphicList(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+
+        try:
+            calculate_function_local_min(
+                serializer.data.get('formula'),
+                serializer.data.get('start_point'),
+                serializer.data.get('step'),
+                serializer.data.get('number_of_points'),
+                serializer.data.get('accuracy')
+            )
+        except Exception as err:
+            return Response(str(err),status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -161,5 +175,6 @@ class GraphicDetail(generics.RetrieveAPIView):
 
             return Response(obj)
 
-        except:
-            return Response(status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as err:
+            print(err)
+            return Response(str(err),status = status.HTTP_500_INTERNAL_SERVER_ERROR)

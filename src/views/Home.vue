@@ -22,7 +22,7 @@
             </v-text-field>
          </v-col>
 
-         <v-col cols="3">
+         <v-col cols="4">
            <v-text-field
                v-model="pointX0"
                placeholder="Point x0:"
@@ -31,7 +31,7 @@
            </v-text-field>
          </v-col>
 
-       <v-col cols="3">
+       <v-col cols="4">
          <v-text-field
              v-model="step"
              placeholder="Step:"
@@ -40,16 +40,7 @@
          </v-text-field>
        </v-col>
 
-       <v-col cols="3">
-         <v-text-field
-             v-model="numberOfPoints"
-             placeholder="Number of points:"
-             type="number"
-             :rules="[v => !!v || 'It\'s not can be empty']">
-         </v-text-field>
-       </v-col>
-
-         <v-col cols="3">
+         <v-col cols="4">
            <v-text-field
                v-model="accuracy"
                placeholder="Accuracy:"
@@ -68,7 +59,14 @@
            </v-btn>
          </v-col>
 
-
+       <v-snackbar
+           v-model="isSnackbarVisible"
+           :top="true"
+           timeout="3000"
+           color="red darken-3"
+       >
+         {{ errorText }}
+       </v-snackbar>
      </v-row>
 
   </v-container>
@@ -85,7 +83,9 @@ export default {
     pointX0: null,
     step: null,
     numberOfPoints: null,
-    accuracy: null
+    accuracy: null,
+    errorText: null,
+    isSnackbarVisible: null,
   }),
   methods: {
     submit() {
@@ -94,7 +94,7 @@ export default {
           formula: this.formula,
           start_point: this.pointX0,
           step: this.step,
-          number_of_points: this.numberOfPoints,
+          number_of_points: 50,
           accuracy: this.accuracy
         })
         .then((res) => {
@@ -102,7 +102,10 @@ export default {
 
           this.$router.push(`/result/${newId}`)
         })
-        .catch(() => {})
+        .catch((err) => {
+          this.errorText = err.response.data;
+          this.isSnackbarVisible = true;
+        })
       }
     }
   }
