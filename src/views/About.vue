@@ -23,13 +23,13 @@
         <p>Algorithm</p>
         <ol>
           <li>Specify the initial localized segment [<strong><em>a<sub>0</sub>,b</em></strong><sub><strong><em>0</em></strong></sub>], accuracy of calculations <strong><em>&epsilon; &gt; 0, k=0</em></strong>;</li>
-          <li>Calculate <strong><em>y<sub>k</sub> = a<sub>k</sub> + \(\boldsymbol{\frac{3 - \sqrt{5}}{2}(b_{k} - a_{k})}\), z<sub>k</sub> = a<sub>k</sub> + \(\boldsymbol{\frac{\sqrt{5} - 1}{2}(b_{k} - a_{k})}\) = a<sub>k</sub> + b<sub>k</sub> - y</em></strong><sub><strong><em>k</em></strong>&nbsp;&nbsp;</sub>and the value of the function at these points&nbsp;<strong><em>f(y<sub>k</sub>),&nbsp;f(z<sub>k</sub>)</em></strong>.</li>
+          <li>Calculate <strong><em>y<sub>k</sub> = a<sub>k</sub> + <v-math formula="$\boldsymbol{\frac{3 - \sqrt{5}}{2}(b_{k} - a_{k})}$"/>, z<sub>k</sub> = a<sub>k</sub> + <v-math formula="$\boldsymbol{\frac{\sqrt{5} - 1}{2}(b_{k} - a_{k})}$"/> = a<sub>k</sub> + b<sub>k</sub> - y</em></strong><sub><strong><em>k</em></strong>&nbsp;&nbsp;</sub>and the value of the function at these points&nbsp;<strong><em>f(y<sub>k</sub>),&nbsp;f(z<sub>k</sub>)</em></strong>.</li>
           <li>Define a new localized segment. If <strong><em>f(y<sub>k</sub>) &le; f(z<sub>k</sub>)</em></strong>&nbsp;
           &nbsp; &nbsp;then <strong><em>a<sub>k+1</sub> = a<sub>k</sub></em></strong>, <strong><em>b<sub>k+1</sub> = z<sub>k</sub></em></strong>, <strong><em>z<sub>k+1</sub> = y<sub>k</sub></em></strong>, <strong><em>y<sub>k+1</sub> = a<sub>k+1</sub> + b<sub>k+1</sub> - z<sub>k+1</sub></em></strong> and go to step 4,
           &nbsp; &nbsp;otherwise put <strong><em>a<sub>k+1</sub> = y</em></strong><sub><strong><em>k</em></strong></sub>, <strong><em>b<sub>k+1</sub> = b</em></strong><sub><strong><em>k</em></strong></sub>, <strong><em>y<sub>k+1</sub> = z</em></strong><sub><strong><em>k</em></strong></sub>,<strong><em>&nbsp;z<sub>k+1</sub> = a<sub>k+1</sub> + b<sub>k+1</sub> - y</em></strong><sub><strong><em>k+1</em></strong></sub> and go to step 4.</li>
           <li>If <strong><em>|a<sub>k+1</sub> - b<sub>k+1</sub>| &le; &epsilon;</em></strong>, the search is complete.</li>
         </ol>
-        <p>You can take the middle of the interval as an approximate solution \(\boldsymbol{x^{*} \cong \frac{a_{k+1} + b_{k+1}}{2}}\)</p>
+        <p>You can take the middle of the interval as an approximate solution <v-math formula="$\boldsymbol{x^{*} \cong \frac{a_{k+1} + b_{k+1}}{2}}$"/></p>
         <p>otherwise, put <strong><em>k = k + 1</em></strong> and go to step 2.</p>
       </v-col>
     </v-row>
@@ -68,5 +68,10 @@
   </v-container>
 </template>
 <script>
-export default {}
+import  {VueMathjax} from 'vue-mathjax';
+export default {
+  components: {
+    'v-math': VueMathjax
+  }
+}
 </script>
