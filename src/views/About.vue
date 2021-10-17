@@ -46,8 +46,8 @@
           <li><b>Log</b> — base-e logarithm (Log[b,x] uses base b)</li>
           <li><b>Log10, Log2</b> — base-10, base-2 logarithms</li>
           <li><b>Exp</b> — exponential</li>
-          <li><b>Power (^)</b> — power (entered as a superscript using )</li>
-          <li><b>Sqrt</b> — square root (entered using )</li>
+          <li><b>Power (^)</b> — power (entered as a superscript using)</li>
+          <li><b>Sqrt</b> — square root (entered using)</li>
           <li><b>CubeRoot, Surd</b> — real-number fractional powers</li>
         </ul>
           <h3>Trigonometric Functions</h3>

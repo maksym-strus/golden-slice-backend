@@ -5,50 +5,61 @@
       <v-col cols="12">
         <h1>Result</h1>
       </v-col>
-      <v-col cols="12">
-        <h3 class="d-inline-block">Formula:
-          <vue-mathjax :formula="resultData.formula" :safe="false"></vue-mathjax>
-        </h3>
-        <h3>Result: {{ resultData.result }}</h3>
-        <h3>Point a: {{ resultData.start_point }}</h3>
-        <h3>Point b: {{ resultData.end_point }}</h3>
-        <h3>Eps: {{ resultData.acc}}</h3>
-        <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
-        <h3>Current iteration: {{ currentIteration + 1 }}</h3>
-      </v-col>
-      <v-col cols="12">
-        <p>
-          <span v-if="currentIteration !== 0">
-            Since
-            <vue-mathjax :formula="`$y_{${ currentIteration - 1 }} = ${ currentIterationData.y_value }$`" />,
-            <vue-mathjax :formula="`$z_{${ currentIteration - 1 }} = ${ currentIterationData.z_value }$`" />
-             and
-            <vue-mathjax :formula="`$f(y_{${ currentIteration - 1 }}) = ${ currentIterationData.f_y_value }$`" />,
-            <vue-mathjax :formula="`$f(z_{${ currentIteration - 1 }}) = ${ currentIterationData.f_z_value }$`" />
-             so
-          <vue-mathjax v-if="currentIterationData.is_left_slice" :formula="`$f(y_{${currentIteration - 1}}) < f(z_{${currentIteration - 1}})$`"/>
-          <vue-mathjax v-if="currentIterationData.is_right_slice" :formula="`$f(y_{${currentIteration - 1}}) > f(z_{${currentIteration - 1}})$`"/><br>
-            then
-          </span>
-          <vue-mathjax :formula="`$a_{${ currentIteration }} = ${ currentIterationData.start_point_value }$`" />,
-          <vue-mathjax :formula="`$b_{${ currentIteration }} = ${ currentIterationData.end_point_value }$`" />
-        </p>
-      </v-col>
-      <v-col cols="12" v-if="resultData">
-        <v-carousel
-            v-model="currentIteration"
-            hide-delimiters
-            :cycle="false"
-            height="500"
-        >
-          <v-carousel-item
-              v-for="(chart,key) in resultData.iterations"
-              :key="key"
+      <template v-if="resultData.iterations">
+        <v-col cols="12">
+          <h3 class="d-inline-block">Formula:
+            <vue-mathjax :formula="resultData.formula" :safe="false"></vue-mathjax>
+          </h3>
+          <h3>Result: {{ resultData.result }}</h3>
+          <h3>Point a: {{ resultData.start_point }}</h3>
+          <h3>Point b: {{ resultData.end_point }}</h3>
+          <h3>Eps: {{ resultData.acc}}</h3>
+          <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
+          <h3>Current iteration: {{ currentIteration + 1 }}</h3>
+        </v-col>
+        <v-col cols="12">
+          <p>
+            <span v-if="currentIteration !== 0">
+              Since
+              <vue-mathjax :formula="`$y_{${ currentIteration - 1 }} = ${ currentIterationData.y_value }$`" />,
+              <vue-mathjax :formula="`$z_{${ currentIteration - 1 }} = ${ currentIterationData.z_value }$`" />
+               and
+              <vue-mathjax :formula="`$f(y_{${ currentIteration - 1 }}) = ${ currentIterationData.f_y_value }$`" />,
+              <vue-mathjax :formula="`$f(z_{${ currentIteration - 1 }}) = ${ currentIterationData.f_z_value }$`" />
+               so
+            <vue-mathjax v-if="currentIterationData.is_left_slice" :formula="`$f(y_{${currentIteration - 1}}) < f(z_{${currentIteration - 1}})$`"/>
+            <vue-mathjax v-if="currentIterationData.is_right_slice" :formula="`$f(y_{${currentIteration - 1}}) > f(z_{${currentIteration - 1}})$`"/><br>
+              then
+            </span>
+            <vue-mathjax :formula="`$a_{${ currentIteration }} = ${ currentIterationData.start_point_value }$`" />,
+            <vue-mathjax :formula="`$b_{${ currentIteration }} = ${ currentIterationData.end_point_value }$`" />
+          </p>
+        </v-col>
+        <v-col cols="12" v-if="resultData">
+          <v-carousel
+              v-model="currentIteration"
+              hide-delimiters
+              :cycle="false"
+              height="500"
           >
-            <line-chart :styles="myStyles" :options="prepareLabel(chart)" :chartdata="chartdata"/>
-          </v-carousel-item>
-        </v-carousel>
-      </v-col>
+            <v-carousel-item
+                v-for="(chart,key) in resultData.iterations"
+                :key="key"
+            >
+              <line-chart :styles="myStyles" :options="prepareLabel(chart)" :chartdata="chartdata"/>
+            </v-carousel-item>
+          </v-carousel>
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col cols="12">
+          <h3 class="d-inline-block">Formula:
+            <vue-mathjax :formula="resultData.formula" :safe="false"></vue-mathjax>
+          </h3>
+          <h3>Result: {{ resultData.result }}</h3>
+          <h3>Eps: {{ resultData.acc}}</h3>
+        </v-col>
+      </template>
     </v-row>
   </v-container>
 </template>

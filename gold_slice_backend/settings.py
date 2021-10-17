@@ -21,7 +21,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'golden-slice-app.herokuapp.com',
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    '0.0.0.0',
 ]
 
 
@@ -170,10 +171,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "https://sub.example.com",
     "http://localhost:8000",
-    "http://127.0.0.1:8082",
-    "http://localhost:8081",
-    "http://localhost:8082",
-    "http://localhost:8083"
+    "http://127.0.0.1:8080",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

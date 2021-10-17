@@ -1,4 +1,4 @@
-import sys
+import traceback
 
 from django.http import HttpResponse, JsonResponse, Http404
 from rest_framework import status
@@ -135,6 +135,8 @@ class GraphicList(generics.ListCreateAPIView):
                 serializer.data.get('accuracy')
             )
         except Exception as err:
+            traceback.print_exc()
+
             return Response(str(err),status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         headers = self.get_success_headers(serializer.data)

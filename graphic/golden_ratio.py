@@ -37,7 +37,8 @@ def dsk(func, start_point, step):
                             "data.")
 
     x = start_point
-    x_values = []
+
+    x_values = [start_point, start_point + h]
 
     k = 0
 
@@ -137,6 +138,14 @@ def calculate_function_local_min(function_string, init_point=0, step=0.1, number
     except:
         raise Exception("Can't read an input function. Please, read 'About' section for getting more information how "
                         "to write functions using Mathematica symbols")
+
+    if (function(init_point + abs(step)) > function(init_point)) and (
+            function(init_point - abs(step)) > function(init_point)) and abs(step) < acc:
+        return {
+            'result': init_point,
+            'formula': f'${latex(formula.get_formula())}$',
+            'acc': acc,
+        }
 
     (a, b) = dsk(function, init_point, step)
 
