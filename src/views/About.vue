@@ -71,7 +71,7 @@
 import  {VueMathjax} from 'vue-mathjax';
 export default {
   components: {
-    'v-math': VueMathjax
+    'v-math':   VueMathjax
   }
 }
 </script>
