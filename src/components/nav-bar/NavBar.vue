@@ -13,8 +13,7 @@
              <v-list-item
                  v-for="(item, i) in items"
                  :key="i"
-                 :to="item.link"
-             >
+                 :to="item.link">
                <v-list-item-icon>
                  <v-icon v-text="item.icon"></v-icon>
                </v-list-item-icon>
@@ -44,7 +43,3 @@ export default {
   })
 }
 </script>
-
-<style scoped>
-
-</style>
