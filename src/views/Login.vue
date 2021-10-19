@@ -80,14 +80,14 @@ export default {
   computed: {
     usernameErrors() {
       const errors = []
-      if (!this.$v.username.$dirty) return errors
+      if (!this.$v.username.$dirty) {return errors}
       !this.$v.username.maxLength && errors.push('Max length of username must be 10 symbols')
       !this.$v.username.required && errors.push('Username is required')
       return errors
     },
     passwordErrors() {
       const errors = []
-      if (!this.$v.password.$dirty) return errors
+      if (!this.$v.password.$dirty) {return errors}
       !this.$v.password.minLength && errors.push('Min length of password must be 8 symbols')
       !this.$v.password.required && errors.push('Password is required')
       return errors

@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import server from "@/utils/server-api";
+import server from '@/utils/server-api';
 import Loading from 'vue-loading-overlay';
 
 export default {
-  name: "ResultList",
+  name: 'ResultList',
   components: {
     Loading
   },
@@ -47,7 +47,7 @@ export default {
       this.loading = false;
     })
   },
-  methods: {
+    methods: {
     getResult(id) {
       this.$router.push(`/result/${id}`)
     }

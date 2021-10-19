@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import NavBar from "../components/nav-bar/NavBar";
+import NavBar from '../components/nav-bar/NavBar';
 export default {
-name: "Main",
+name: 'Main',
   components: {NavBar}
 }
 </script>

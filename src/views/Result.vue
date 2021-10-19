@@ -10,12 +10,12 @@
           <h3 class="d-inline-block">Formula:
             <vue-mathjax :formula="resultData.formula" :safe="false"></vue-mathjax>
           </h3>
-          <h3>Result: {{ resultData.result }}</h3>
-          <h3>Point a: {{ resultData.start_point }}</h3>
-          <h3>Point b: {{ resultData.end_point }}</h3>
-          <h3>Eps: {{ resultData.acc}}</h3>
-          <h3>Number of iterations: {{ resultData.number_of_iterations}}</h3>
-          <h3>Current iteration: {{ currentIteration + 1 }}</h3>
+          <h3>Result: <span data-test="result">{{ resultData.result }}</span></h3>
+          <h3>Point a: <span data-test="pointA">{{ resultData.start_point }}</span></h3>
+          <h3>Point b: <span data-test="pointB">{{ resultData.end_point }}</span></h3>
+          <h3>Eps: <span data-test="eps">{{ resultData.acc}}</span></h3>
+          <h3>Number of iterations: <span data-test="numberOfIterations">{{ resultData.number_of_iterations}}</span></h3>
+          <h3>Current iteration: <span data-test="currentIter">{{ currentIteration + 1 }}</span></h3>
         </v-col>
         <v-col cols="12">
           <p>
@@ -65,15 +65,15 @@
 </template>
 
 <script>
-import server from "@/utils/server-api";
+import server from '../utils/server-api';
 
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import LineChart from "@/views/LineChart";
+import LineChart from '../views/LineChart';
 import { VueMathjax } from 'vue-mathjax'
 
 export default {
-name: "Result",
+name: 'Result',
   components: {
     LineChart,
     Loading,
@@ -91,9 +91,7 @@ name: "Result",
         .then((res) => {
           this.resultData = res.data
         })
-        .catch((err) => {
-          console.log(err.response.data);
-          console.log(err.response);
+        .catch(() => {
           this.$router.push({name: 'Home'})
         })
       .finally(() => {

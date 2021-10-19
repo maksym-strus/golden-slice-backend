@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 const server = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL
+    baseURL: window.process.env.VUE_APP_BASE_URL
 })
 
 server.defaults.xsrfCookieName = 'csrftoken'

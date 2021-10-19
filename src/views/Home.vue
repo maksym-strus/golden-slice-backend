@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import server from "@/utils/server-api";
+import server from '@/utils/server-api';
 
 export default {
   name: 'Home',
