@@ -345,3 +345,4 @@ pnpm-debug.log*
 #other
 public/
 **/static/
+coverage/
