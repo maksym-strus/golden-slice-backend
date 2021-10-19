@@ -52,4 +52,5 @@ module.exports = {
   ],
   setupFiles: ['<rootDir>/src/tests/setup.js'],
   collectCoverage: true,
+  testResultsProcessor: 'jest-teamcity-reporter'
 }
