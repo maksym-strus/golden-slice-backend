@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "AuthCard",
+  name: 'AuthCard',
   props: {
     title: {
       type: String,

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Auth from "../views/Auth";
-import Main from "../views/Main";
+import Auth from '../views/Auth';
+import Main from '../views/Main';
 import store from '../store';
 
 Vue.use(VueRouter)
@@ -36,7 +36,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: window.process.env.BASE_URL,
   routes
 })
 

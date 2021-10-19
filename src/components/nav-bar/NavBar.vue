@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "NavBar",
+  name: 'NavBar',
   data: () => ({
     selectedItem: 1,
     items: [

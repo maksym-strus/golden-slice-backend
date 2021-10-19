@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es6": true
@@ -11,13 +11,19 @@ module.exports = {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "parser": "vue-eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 2018,
+        "parser": "babel-eslint",
+        "ecmaVersion": 8,
         "sourceType": "module"
     },
     "plugins": [
         "vue"
     ],
     "rules": {
-    }
-};
+        "eqeqeq": "off",
+        "curly": "error",
+        "quotes": ["error", "single"]
+    },
+    "ignorePatterns": ["*.config.js", "*.test.js", ".eslintrc.js"]
+}

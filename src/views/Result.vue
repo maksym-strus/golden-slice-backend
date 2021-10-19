@@ -65,15 +65,15 @@
 </template>
 
 <script>
-import server from "../utils/server-api";
+import server from '../utils/server-api';
 
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import LineChart from "../views/LineChart";
+import LineChart from '../views/LineChart';
 import { VueMathjax } from 'vue-mathjax'
 
 export default {
-name: "Result",
+name: 'Result',
   components: {
     LineChart,
     Loading,
